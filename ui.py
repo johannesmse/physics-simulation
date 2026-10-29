@@ -38,6 +38,7 @@ class UI:
 
 
     def draw(self):
+        self.screen.fill(self.black)
         self.draw_regions()
         self.draw_balls()
 

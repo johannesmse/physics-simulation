@@ -3,6 +3,6 @@ class Region:
         self.gravity = gravity
 
         self.x = 200
-        self.y = 200
+        self.y = 10
         self.width = 400
-        self.height = 400
+        self.height = 750
