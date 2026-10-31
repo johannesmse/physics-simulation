@@ -11,20 +11,15 @@ world = World()
 game_ui = UI(screen, world)
 running = True
 
-world_update_timer = 0
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-    if world_update_timer == 2:
-        world.update_world()
-        world_update_timer = 0
-    else:
-        world_update_timer += 1
 
+    world.update_world()
     game_ui.draw()
     pygame.display.flip()
-    clock.tick(400)
+    clock.tick(120)
 
 pygame.quit()

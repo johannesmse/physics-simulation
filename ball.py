@@ -7,9 +7,9 @@ class Ball:
         self.vel_x = 0
         self.vel_y = 0
 
-    def update_position(self):
-        self.x += self.vel_x
-        self.y += self.vel_y
+    def update_position(self, dt):
+        self.x += self.vel_x * dt
+        self.y += self.vel_y * dt
 
-    def update_velocity(self):
-        self.vel_y += 0.03
+    def update_velocity(self, dt):
+        self.vel_y += 500 * dt
