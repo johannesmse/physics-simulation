@@ -8,5 +8,6 @@ class Region:
         self.height = 750
 
         self.floor = self.y + self.height
+        self.roof = self.y
         self.right_wall = self.x + self.width
         self.left_wall = self.x

@@ -5,13 +5,20 @@ class UI:
     def __init__(self, screen, world):
         self.screen = screen
         self.world = world
+        
 
         self.region_rectangles = []
         self.init_regions()
 
+        self.grey = (54, 69, 79)
         self.white = (255, 255, 255)
         self.black = (0, 0, 0)
-        self.grey = (54, 69, 79)
+        self.purple = (128, 0, 128)
+        self.red = (255, 0, 0)
+        self.green = (0, 255, 0)
+        self.blue = (0, 0, 255)
+
+        self.color_array = [self.white, self.black, self.purple, self.red, self.green, self.blue]
 
     def add_region_rect(self, region):
         """
@@ -33,7 +40,7 @@ class UI:
 
     def draw_balls(self):
         for ball in self.world.balls:
-            pygame.draw.circle(self.screen, self.white, (ball.x, ball.y), ball.radius)
+            pygame.draw.circle(self.screen, self.color_array[ball.color], (ball.x, ball.y), ball.radius)
 
 
 
