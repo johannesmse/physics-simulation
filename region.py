@@ -6,3 +6,5 @@ class Region:
         self.y = 10
         self.width = 400
         self.height = 750
+
+        self.floor = self.y + self.height

@@ -11,9 +11,18 @@ class World:
 
 
     def update_world(self):
-        dt = time.perf_counter() - self.last_update
-        self.last_update = time.perf_counter()
+        current_time = time.perf_counter()
+        dt = current_time - self.last_update
+        self.last_update = current_time
 
         for ball in self.balls:
-            ball.update_position(dt)
-            ball.update_velocity(dt)
+            if ball.edge_down <= self.regions[0].floor:
+                ball.apply_gravity(dt)
+                ball.update_position(dt)
+            elif ball.vel_y > 10:
+                ball.collide_floor()
+                ball.update_position(dt)
+            elif ball.vel_y > 10 or ball.vel_y < -10:
+                ball.update_position(dt)
+
+            

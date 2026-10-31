@@ -20,6 +20,6 @@ while running:
     world.update_world()
     game_ui.draw()
     pygame.display.flip()
-    clock.tick(120)
+    clock.tick(200)
 
 pygame.quit()

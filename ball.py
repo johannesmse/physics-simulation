@@ -7,9 +7,19 @@ class Ball:
         self.vel_x = 0
         self.vel_y = 0
 
+    @property
+    def edge_down(self):
+        return self.y + self.radius
+
     def update_position(self, dt):
         self.x += self.vel_x * dt
         self.y += self.vel_y * dt
 
-    def update_velocity(self, dt):
-        self.vel_y += 500 * dt
+    def apply_gravity(self, dt):
+        self.vel_y += 700 * dt
+
+    def collide_floor(self):
+        if self.vel_y < 1:
+            self.vel_y = 0
+        else:
+            self.vel_y = -0.6 * self.vel_y
