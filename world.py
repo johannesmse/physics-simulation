@@ -17,8 +17,15 @@ class World:
         self.last_update = current_time
 
         for ball in self.balls:
-            if not ball.resting:
+            if ball.edge_left <= self.regions[0].left_wall:
+                ball.collide_wall()
+                ball.x = self.regions[0].left_wall + ball.radius
 
+            elif ball.edge_right >= self.regions[0].right_wall:
+                ball.collide_wall()
+                ball.x = self.regions[0].right_wall - ball.radius
+
+            if not ball.resting:
                 if ball.in_air(self.regions[0].floor):
                     ball.apply_gravity(700, dt)
 
@@ -29,6 +36,7 @@ class World:
                 # Ball is on floor with low velocity
                 elif ball.vel_y > -self.resting_threshold:
                     ball.resting = True
-                    continue
+                    continue 
 
-                ball.update_position(dt)
+
+            ball.update_position(dt)
