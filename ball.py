@@ -6,17 +6,22 @@ class Ball:
 
         self.vel_x = 0
         self.vel_y = 0
+        self.resting = False
 
     @property
     def edge_down(self):
         return self.y + self.radius
 
+    def in_air(self, floor):
+        return self.edge_down <= floor
+
     def update_position(self, dt):
         self.x += self.vel_x * dt
         self.y += self.vel_y * dt
 
-    def apply_gravity(self, dt):
-        self.vel_y += 700 * dt
+
+    def apply_gravity(self, gravity, dt):
+        self.vel_y += gravity * dt
 
     def collide_floor(self):
         if self.vel_y < 1:

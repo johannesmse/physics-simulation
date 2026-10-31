@@ -5,9 +5,10 @@ import time
 class World:
     def __init__(self):
         self.regions = [Region(5)]
-        self.balls = [Ball(400, 30, 20)]
+        self.balls = [Ball(400, 30, 20), Ball(300, 100, 20), Ball(250, 80, 20), Ball(450, 200, 20), Ball(500, 50, 20)]
 
         self.last_update = time.perf_counter()
+        self.resting_threshold = 5
 
 
     def update_world(self):
@@ -16,13 +17,18 @@ class World:
         self.last_update = current_time
 
         for ball in self.balls:
-            if ball.edge_down <= self.regions[0].floor:
-                ball.apply_gravity(dt)
-                ball.update_position(dt)
-            elif ball.vel_y > 10:
-                ball.collide_floor()
-                ball.update_position(dt)
-            elif ball.vel_y > 10 or ball.vel_y < -10:
-                ball.update_position(dt)
+            if not ball.resting:
 
-            
+                if ball.in_air(self.regions[0].floor):
+                    ball.apply_gravity(700, dt)
+
+                # Ball is colliding with floor
+                elif ball.vel_y > self.resting_threshold:
+                    ball.collide_floor()
+
+                # Ball is on floor with low velocity
+                elif ball.vel_y > -self.resting_threshold:
+                    ball.resting = True
+                    continue
+
+                ball.update_position(dt)
